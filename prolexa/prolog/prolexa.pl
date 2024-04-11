@@ -21,7 +21,15 @@
 %some intial stored rules
 stored_rule(1,[(mortal(X):-human(X))]).
 stored_rule(1,[(human(peter):-true)]).
+stored_rule(1,[(human(sk):-true), (genius(sk):-true)]).
+stored_rule(1,[(human(sk):-true), (volunteer(sk):-true)]).
+stored_rule(1,[(win(X):-genius(X))]).
+stored_rule(1,[(genius(donald):-true)]).
 
+stored_rule(1,[(enthusiastic(X):-volunteer(X))]).
+stored_rule(1,[(not enthusiastic(bob):-true)]).
+stored_rule(1,[(adorable(X):-capybara(X))]).
+stored_rule(1,[(not adorable(bob):-true)]).
 
 %%% Prolexa Command Line Interface %%%
 
@@ -172,4 +180,5 @@ mk_prolexa_intents:-
 				}
 			   ),
 		close(Stream).
+
 

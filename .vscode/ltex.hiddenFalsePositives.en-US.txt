@@ -1,0 +1,1 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qif necessary\nOnce you're done commit all the changes and push them to GitHub\\E$"}
