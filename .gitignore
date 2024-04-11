@@ -8,3 +8,6 @@
 prolexa/prolexa.pl
 prolexa/knowledge_store.pl
 prolexa.egg-info
+
+# Idea
+/.idea/*
