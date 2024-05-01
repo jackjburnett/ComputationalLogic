@@ -5,6 +5,7 @@ utterance(C) --> question(C).
 utterance(C) --> command(C).
 
 :- op(600, xfy, '=>').
+%%% mapping predicates to operators for not %%%
 :- op(900, fy, not).
 not(X) :- \+ X.
 
@@ -19,6 +20,8 @@ iverb(p,M)			--> [Verb],   {pred2gr(_P,1,v/Verb,M)}.
 % unary predicates for adjectives, nouns and verbs
 pred(human,   1,[a/human,n/human]).
 pred(mortal,  1,[a/mortal,n/mortal]).
+
+%%% Changed these for testing of new rules %%%
 pred(enthusiastic, 1, [a/enthusiastic]).
 pred(volunteer, 1, [n/volunteer]).
 pred(adorable, 1, [a/adorable]).
@@ -62,10 +65,11 @@ sentence1([(L:-true)]) --> proper_noun(N,X),verb_phrase(N,X=>L).
 % Added the following for negations of terms
 sentence1([(not L:-true)]) --> proper_noun(N,X),negative_verb_phrase(N,not X=>L).  % E.g., Donald is not a teacher
 sentence1([(not H:-B)]) --> determiner(N,M1,M2,[(not H:-B)]),noun(N,M1),negative_verb_phrase(N,not M2). % E.g., all birds are not happy
-%for existential quantification
+% for existential quantification
 sentence1((Q1,Q2)) --> [there,is],noun(s,sk=>Q1),verb_phrase(s,sk=>Q2). 
 sentence1((Q1,Q2)) --> [there,are],noun(p,sk=>Q1),verb_phrase(p,sk=>Q2).
 
+% TODO: explain this with comments %
 verb_phrase(s,M) --> [is],property(s,M).
 verb_phrase(p,M) --> [are],property(p,M).
 verb_phrase(N,M) --> iverb(N,M).
@@ -85,6 +89,7 @@ determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(s,X=>B,not X=>H,[(not H:-B)]) --> [every].
 determiner(p,X=>B,X=>H,[(default(H:-B))]) --> [most]. 
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
+% TODO: explain this with comments %
 determiner(p,X=>B,not X=>H,[(not H:-B)]) --> [all].
 determiner(p,X=>B,not X=>H,[(not H:-B)]) --> []. 
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [].
@@ -108,6 +113,7 @@ question1(Q) --> [who],verb_phrase(s,_X=>Q).
 question1(not Q) --> [who],verb_phrase(s,[(not _X=>Q)]). 
 question1(Q) --> [is], proper_noun(N,X),property(N,X=>Q).
 question1(Q) --> [does],proper_noun(_,X),verb_phrase(_,X=>Q).
+% TODO: explain this with comments %
 question1((Q1,Q2)) --> [do],[some],noun(p,sk=>Q1),verb_phrase(p,sk=>Q2).
 question1((Q1,Q2)) --> [are],[some],noun(p,sk=>Q1),property(p,sk=>Q2).
 
@@ -126,6 +132,7 @@ command(g(retractall(prolexa:stored_rule(_,C)),"I erased it from my memory")) --
 command(g(retractall(prolexa:stored_rule(_,_)),"I am a blank slate")) --> forgetall. 
 command(g(all_rules(Answer),Answer)) --> kbdump. 
 command(g(all_answers(PN,Answer),Answer)) --> tellmeabout,proper_noun(s,PN).
+% TODO: explain this with comments %
 command(g(explain_question(Q,_,Answer),Answer)) --> [explain],[why],sentence1([(Q:-true)]).
 command(g(explain_question(Q1,Q2,_,Answer),Answer)) --> [explain],[why],sentence1([(Q1:-true),(Q2:-true)]).
 command(g(random_fact(Fact),Fact)) --> getanewfact.
