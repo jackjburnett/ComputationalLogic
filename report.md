@@ -1,16 +1,15 @@
 # Computational Logic Assignment
 ## TODO
-- [ ] Introduction
-- [ ] Negation
-- [ ] Negation Testing
-- [ ] Disjunction
-- [ ] Disjunction Testing]
-- [ ] Existential Quantification
-- [ ] Existential Quantification Testing
-- [ ] Disjunction Testing
-- [ ] Default Rules
-- [ ] Default Rules Testing
-- [ ] Further work
+- [ ] Introduction - Vishal
+- [ ] Negation - Vishal
+- [ ] Negation Testing - Vishal
+- [ ] Disjunction - Jack
+- [ ] Disjunction Testing - Jack
+- [ ] Existential Quantification - Vishal
+- [ ] Existential Quantification Testing - Vishal
+- [ ] Default Rules - Jack
+- [ ] Default Rules Testing - Jack
+- [ ] Further work - Jack
 
 ## Introduction
 
@@ -25,6 +24,9 @@
 ## Existential Quantification
 ### Implementation
 ### Testing
+```
+print hello
+```
 
 ## Default Rules
 ### Implementation
