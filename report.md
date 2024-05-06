@@ -3,10 +3,13 @@
 - [ ] Introduction
 - [ ] Negation
 - [ ] Negation Testing
+- [ ] Disjunction
+- [ ] Disjunction Testing]
+- [ ] Existential Quantification
+- [ ] Existential Quantification Testing
+- [ ] Disjunction Testing
 - [ ] Default Rules
 - [ ] Default Rules Testing
-- [ ] Disjunction
-- [ ] Disjunction Testing
 - [ ] Further work
 
 ## Introduction
@@ -15,11 +18,15 @@
 ### Implementation
 ### Testing
 
-## Default Rules
+## Disjunction
 ### Implementation
 ### Testing
 
-## Disjunction
+## Existential Quantification
+### Implementation
+### Testing
+
+## Default Rules
 ### Implementation
 ### Testing
 
