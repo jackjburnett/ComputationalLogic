@@ -1,16 +1,15 @@
 # Computational Logic Assignment
 ## TODO
-- [ ] Introduction
-- [ ] Negation
-- [ ] Negation Testing
-- [ ] Disjunction
-- [ ] Disjunction Testing]
-- [ ] Existential Quantification
-- [ ] Existential Quantification Testing
-- [ ] Disjunction Testing
-- [ ] Default Rules
-- [ ] Default Rules Testing
-- [ ] Further work
+- [ ] Introduction - Vishal
+- [ ] Negation - Vishal
+- [ ] Negation Testing - Vishal
+- [ ] Disjunction - Jack
+- [ ] Disjunction Testing - Jack
+- [ ] Existential Quantification - Vishal
+- [ ] Existential Quantification Testing - Vishal
+- [ ] Default Rules - Jack
+- [ ] Default Rules Testing - Jack
+- [ ] Further work - Jack
 
 ## Introduction
 The objective of this coursework assignment was to implement additional functionality to the Prolexa code that it cannot currently handle. In our case, we implemented negation, existential quantification, disjunction and default rules. This report will discuss and explain how the functionalities were implemented, the tests that we used to check they work and the suggestions for further work to improve Prolexa.
@@ -188,6 +187,9 @@ prove_rb((exists(V, A)), Rulebase, P0, P) :- !, % Handling existential quantific
 It deals with existential quantification, by generating a new variable, substituting it into the formula, then continues the proof process with the modified formula in the rule base. The first line state that to prove the existence of a variable 'V' such that 'A' holds, for a given rulebase 'Rulebase', starting probability 'P0' and the result 'P', the predicate should follow the steps provided. A cut is also added, which commits to the clause to prevent backtracking, only if it matches. The second line generates the fresh variable which is not present in the system already. The reason this was added was to avoid variable capture which was not intended and to prevent clashes with existing variables. The third line substitutes all occurrences of the variable 'V' within the formula 'A' with the fresh variable 'FreshV' resulting in the 'NewA' formula. This ensures that existential quantification is handled properly by replacing the variable 'V' with a fresh one. The last line recursively calls 'prove_rb' with the modified formula which now does not contain the existential quantification. Thus, the proof continues with the modified formula.
 
 ### Testing
+```
+print hello
+```
 
 Below we present a test of existential quantification.
 
@@ -217,3 +219,4 @@ Whilst again, this has sound logic and gives us the outcome that we desire, the 
 ### Testing
 
 ## Further Work
+
