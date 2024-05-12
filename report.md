@@ -213,7 +213,7 @@ A determiner was required in the grammar. The term 'most' wass used to align wit
 ```
 determiner(p,X=>B,X=>H,[(default(H:-B))]) --> [most]. 
 ```
-The meta-interpretet from Simply Logical 8.1 was implemented, with minor changes. explain_rb replaced explain, and variables mirroring prove_rb. First the top level explanation was implemented:
+The meta-interpreter from Simply Logical 8.1 was implemented, with minor changes. explain_rb replaced explain, and variables mirroring prove_rb. First the top level explanation was implemented:
 ```
 explain_rb(Q,RB):-
 	explain_rb(Q,RB,[],_P).
@@ -272,7 +272,9 @@ abduce(A, Rulebase, P0, P) :-
 find_explanation((A:-B), Rule, Rulebase) :-
     find_clause((A:-B), Rule, Rulebase).
 ```
-find_explanation was used to give clarity to the code's functioanlity.
+find_explanation was used to give clarity to the code's functionality.
+
+### Testing
 
 ## Further Work
 This assignment did not implement disjuction within prolexa plus; however, this can be implemented through building upon Simply Logical chapter 8.3 by modifying the below code for prolexa:
