@@ -18,7 +18,7 @@
 :-prompt(_Old,'prolexa> ').
 
 
-%some intial stored rules
+% some intial stored rules
 stored_rule(1,[(mortal(X):-human(X))]).
 stored_rule(1,[(human(peter):-true)]).
 stored_rule(1,[(human(sk):-true), (genius(sk):-true)]).
@@ -30,6 +30,15 @@ stored_rule(1,[(enthusiastic(X):-volunteer(X))]).
 stored_rule(1,[(not enthusiastic(bob):-true)]).
 stored_rule(1,[(adorable(X):-capybara(X))]).
 stored_rule(1,[(not adorable(bob):-true)]).
+
+% default rules, using birds and flying example from simply logical 8.1
+stored_rule(1,[(default(flies(X):-bird(X)))]).
+stored_rule(1,[(not flies(X):-penguin(X))]). % exception to the default rule
+stored_rule(1,[(bird(X):-penguin(X))]).
+stored_rule(1,[(penguin(tweety):-true)]).
+stored_rule(1,[(bird(opus):-true)]).
+
+
 
 %%% Prolexa Command Line Interface %%%
 
