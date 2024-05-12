@@ -163,6 +163,9 @@ contradiction(not A,Rulebase,P):-!,
 contradiction(A,Rulebase,P):-
 	prove_e(not A,Rulebase,P,_P1).
 
+%
+
+
 % Utility predicate for generating fresh variables
 fresh_variable(V, FreshV) :-
     atomic_concat('_', V, FreshV).

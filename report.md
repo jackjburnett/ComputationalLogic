@@ -1,11 +1,11 @@
 # Computational Logic Assignment
 ## TODO
-- [ ] Disjunction - Jack
-- [ ] Disjunction Testing - Jack
+- [ ] Abduction - Jack
+- [ ] Abduction Testing - Jack
 - [ ] Default Rules Testing - Jack
 
 ## Introduction
-The objective of this coursework assignment was to implement additional functionality to the Prolexa code that it cannot currently handle. In our case, we implemented negation, existential quantification, disjunction and default rules. This report will discuss and explain how the functionalities were implemented, the tests that we used to check they work and the suggestions for further work to improve Prolexa.
+The objective of this coursework assignment was to implement additional functionality to the Prolexa code that it cannot currently handle. In our case, we implemented negation, existential quantification, abduction and default rules. This report will discuss and explain how the functionalities were implemented, the tests that we used to check they work and the suggestions for further work to improve Prolexa.
 
 ## Negation
 Negation was one of the first functionalities implemented along with default rules. Initially, Prolexa was unable to handle logical negation. This is a more fundamental issue with prolog, which uses negation as failure which is separate to logical negation. An example can be used to illustrate the difference between the two: "All lions are carnivorous. Ben is not carnivorous, therefore Ben is not a lion", is an example of logical negation. Negation as failure on the other hand would be "lions do not eat crocodiles". This does not explicitly state that lions eat animals which are not crocodiles; it implies that there is no evidence/rule in our knowledge base which states that lions eat crocodiles. Hence, in the absence of evidence to the contrary, the assumption is that lions do not eat crocodiles.
@@ -258,5 +258,28 @@ After initial testing, the names attachment from 8.1 was identified to be alread
 ### Testing
 
 ## Further Work
-This assignment did not implement Abduction within prolexa plus; however, this can be implemented through following Simply Logical chapter 8.4's abduction meta-interpreter and abduction explanation.
+This assignment did not implement Abduction within prolexa plus; however, this can be implemented through building upon Simply Logical chapter 8.3 by modifying the below code for prolexa:
+```
+% abduce_not(O,E0,E) <- E is abductive expl. of not(O)
+abduce_not((A,B),E0,E):-!,
+    abduce_not(A,E0,E);       % disjunction
+    abduce_not(B,E0,E).
+abduce_not(A,E0,E):-
+    setof(B,clause(A,B),L),
+    abduce_not_l(L,E0,E).
+abduce_not(A,E,E):-
+    element(not(A),E).        % not(A) already assumed
+abduce_not(A,E,[not(A)|E]):-  % not(A) can be added to E
+    not element(not(A),E),    % if it's not already there,
+    abducible(A),             % if A is abducible
+    not abduce(A,E,E).        % and E doesn't explain A
+abduce_not(not(A),E0,E):-     % find explanation for A
+    not element(not(A),E0),   % should be consistent
+    abduce(A,E0,E).
+
+abduce_not_l([],E,E).
+abduce_not_l([B|Bs],E0,E):-
+    abduce_not(B,E0,E1),
+    abduce_not_l(Bs,E1,E).
+```
  
