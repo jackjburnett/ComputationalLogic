@@ -187,10 +187,6 @@ prove_rb((exists(V, A)), Rulebase, P0, P) :- !, % Handling existential quantific
 It deals with existential quantification, by generating a new variable, substituting it into the formula, then continues the proof process with the modified formula in the rule base. The first line state that to prove the existence of a variable 'V' such that 'A' holds, for a given rulebase 'Rulebase', starting probability 'P0' and the result 'P', the predicate should follow the steps provided. A cut is also added, which commits to the clause to prevent backtracking, only if it matches. The second line generates the fresh variable which is not present in the system already. The reason this was added was to avoid variable capture which was not intended and to prevent clashes with existing variables. The third line substitutes all occurrences of the variable 'V' within the formula 'A' with the fresh variable 'FreshV' resulting in the 'NewA' formula. This ensures that existential quantification is handled properly by replacing the variable 'V' with a fresh one. The last line recursively calls 'prove_rb' with the modified formula which now does not contain the existential quantification. Thus, the proof continues with the modified formula.
 
 ### Testing
-```
-print hello
-```
-
 Below we present a test of existential quantification.
 
 ```
@@ -216,6 +212,56 @@ Whilst again, this has sound logic and gives us the outcome that we desire, the 
 
 ## Default Rules
 ### Implementation
+To test default rules, the birds and flying example from Simply Logical 8.1 were implemented. The grammar did not need to be changed for these stored rules. The following code was used to implement the rules from Simply Logical:
+```
+stored_rule(1,[(default(flies(X):-bird(X)))]).
+stored_rule(1,[(not flies(X):-penguin(X))]). % exception to the default rule
+stored_rule(1,[(bird(X):-penguin(X))]).
+stored_rule(1,[(penguin(tweety):-true)]).
+stored_rule(1,[(bird(opus):-true)]).
+```
+A determiner was required in the grammar. The term 'most' wass used to align with the examples provided in assignment.md. The determiner translates default rules to 'most'. 
+```
+determiner(p,X=>B,X=>H,[(default(H:-B))]) --> [most]. 
+```
+The meta-interpretet from Simply Logical 8.1 was implemented, with minor changes. explain_rb replaced explain, and variables mirroring prove_rb. First the top level explanation was implemented:
+```
+explain_rb(Q,RB):-
+	explain_rb(Q,RB,[],_P).
+```
+Then the meta-interpreter for rules and defaults was implemented:
+```
+explain_rb(true,_Rulebase,P, P):-!.
+explain_rb((A,B),Rulebase,P0,P):-!,
+  explain_rb(A,Rulebase,P0,P1),
+  explain_rb(B,Rulebase,P1,P).
+explain_rb(A,Rulebase,P0,P):-
+  prove_rb(A,Rulebase,P0,P). % explain by rules only
+explain_rb(A,Rulebase,P0,P):-
+  find_clause(default(A:-B),Rule,Rulebase),
+  explain_rb(B,Rulebase,[p(A,Rule)|P0],P),
+  not contradiction(A,Rulebase,P). % A consistent with P
+```
+Next the meta-interpreter for rules was implemented, this was done through copying prove_rb and changing it to prove_e to mirror Simply Logical 8.1:
+```
+prove_e(true,_Rulebase,P,P):-!.
+prove_e((A,B),Rulebase,P0,P):-!,
+	find_clause((A:-C),Rule,Rulebase),
+	conj_append(C,B,D),
+  prove_e(D,Rulebase,[p((A,B),Rule)|P0],P).
+prove_e(A,Rulebase,P0,P):-
+  find_clause((A:-B),Rule,Rulebase),
+	prove_e(B,Rulebase,[p(A,Rule)|P0],P).
+```
+Finally, the contradiction against rules from Simply Logical 8.1 was implemented:
+```
+% Check contradiction against rules
+contradiction(not A,Rulebase,P):-!,
+	prove_e(A,Rulebase,P,_P1).
+contradiction(A,Rulebase,P):-
+	prove_e(not A,Rulebase,P,_P1).
+```
+After initial testing, the names attachment from 8.1 was identified to be already implemented through the initial prolexa_plus commit.
 ### Testing
 
 ## Further Work

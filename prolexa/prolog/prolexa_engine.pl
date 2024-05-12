@@ -123,12 +123,10 @@ explain_rb(A,Rulebase,P0,P):-
 
 % 3rd argument is accumulator for proofs
 prove_rb(true,_Rulebase,P,P):-!.
-
 prove_rb((A,B),Rulebase,P0,P):-!,
 	find_clause((A:-C),Rule,Rulebase),
 	conj_append(C,B,D),
     prove_rb(D,Rulebase,[p((A,B),Rule)|P0],P).
-
 prove_rb(A,Rulebase,P0,P):-
     find_clause((A:-B),Rule,Rulebase),
 	prove_rb(B,Rulebase,[p(A,Rule)|P0],P).
