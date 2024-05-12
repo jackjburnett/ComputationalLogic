@@ -152,7 +152,7 @@ prove_e(true,_Rulebase,P,P):-!.
 prove_e((A,B),Rulebase,P0,P):-!,
 	find_clause((A:-C),Rule,Rulebase),
 	conj_append(C,B,D),
-  prove_e(D,Rulebase,[p((A,B),Rule)|P0],P).
+    prove_e(D,Rulebase,[p((A,B),Rule)|P0],P).
 prove_e(A,Rulebase,P0,P):-
   find_clause((A:-B),Rule,Rulebase),
 	prove_e(B,Rulebase,[p(A,Rule)|P0],P).
@@ -163,7 +163,17 @@ contradiction(not A,Rulebase,P):-!,
 contradiction(A,Rulebase,P):-
 	prove_e(not A,Rulebase,P,_P1).
 
-%
+% Meta-interpreter for abduction
+abduce(true, _Rulebase, P, P) :- !.
+abduce((A, B), Rulebase, P0, P) :- !,
+    find_explanation((A:-C), Rule, Rulebase),
+    conj_append(C, B, D),
+    abduce(D, Rulebase, [p((A,B), Rule)|P0], P).
+abduce(A, Rulebase, P0, P) :-
+    find_explanation((A:-B), Rule, Rulebase),
+    abduce(B, Rulebase, [p(A, Rule)|P0], P).
+find_explanation((A:-B), Rule, Rulebase) :-
+    find_clause((A:-B), Rule, Rulebase).
 
 
 % Utility predicate for generating fresh variables

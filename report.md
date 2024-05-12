@@ -113,10 +113,6 @@ Sorry, I don't think this is the case
 
 ```
 
-## Disjunction
-### Implementation
-### Testing
-
 ## Existential Quantification
 Existential quantification is a method for making statements which assert the existence of something without specifying what the thing is. In prolog, the typical way of achieving existential quantification is implicitly through variables. When a prolog program is queried, the variables may be used to ask if there exists a value which satisfies specific conditions. Prolog will then search for the values which satisfy those conditions, binding the variables. An example is given below.
 
@@ -257,8 +253,29 @@ contradiction(A,Rulebase,P):-
 After initial testing, the names attachment from 8.1 was identified to be already implemented through the initial prolexa_plus commit.
 ### Testing
 
+## Abduction
+The implementation of abduction used for testing builds upon default rules; it implements a rule that can fly, to identify if it will be explained through being a bird.
+```
+stored_rule(1,[(flies(abe):-true)]).
+```
+### Implementation
+Abduction is implemented through replicating default rules, but combining explanations rather than proving each component. Abduction forms an explanation rather than proving components, the below code is used to implement abduction:
+```
+abduce(true, _Rulebase, P, P) :- !.
+abduce((A, B), Rulebase, P0, P) :- !,
+    find_explanation((A:-C), Rule, Rulebase),
+    conj_append(C, B, D),
+    abduce(D, Rulebase, [p((A,B), Rule)|P0], P).
+abduce(A, Rulebase, P0, P) :-
+    find_explanation((A:-B), Rule, Rulebase),
+    abduce(B, Rulebase, [p(A, Rule)|P0], P).
+find_explanation((A:-B), Rule, Rulebase) :-
+    find_clause((A:-B), Rule, Rulebase).
+```
+find_explanation was used to give clarity to the code's functioanlity.
+
 ## Further Work
-This assignment did not implement Abduction within prolexa plus; however, this can be implemented through building upon Simply Logical chapter 8.3 by modifying the below code for prolexa:
+This assignment did not implement disjuction within prolexa plus; however, this can be implemented through building upon Simply Logical chapter 8.3 by modifying the below code for prolexa:
 ```
 % abduce_not(O,E0,E) <- E is abductive expl. of not(O)
 abduce_not((A,B),E0,E):-!,
