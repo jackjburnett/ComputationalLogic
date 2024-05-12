@@ -110,18 +110,16 @@ add_body_to_rulebase((A,B),Rs0,Rs):-!,
 add_body_to_rulebase(A,Rs0,[[(A:-true)]|Rs0]).
 
 % meta-interpreter for rules and defaults from Section 8.1 of Peter Flach's simply logical book
+explain_rb(true,_Rulebase,P, P):-!.
 explain_rb((A,B),Rulebase,P0,P):-!,
-  explain_rb(A,Rulebase,P0,P1),
-  explain_rb(B,Rulebase,P1,P).
-explain_rb([A,B],Rulebase,P0,P):-!,
   explain_rb(A,Rulebase,P0,P1),
   explain_rb(B,Rulebase,P1,P).
 explain_rb(A,Rulebase,P0,P):-
   prove_rb(A,Rulebase,P0,P). % explain by rules only
 explain_rb(A,Rulebase,P0,P):-
-	find_clause(default(A:-B),Rule,Rulebase),
+  find_clause(default(A:-B),Rule,Rulebase),
   explain_rb(B,Rulebase,[p(A,Rule)|P0],P),
-  not contradiction(A,Rulebase,P). 
+  not contradiction(A,Rulebase,P). % A consistent with P
 
 % 3rd argument is accumulator for proofs
 prove_rb(true,_Rulebase,P,P):-!.
