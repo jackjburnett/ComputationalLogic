@@ -1,13 +1,7 @@
 # Computational Logic Assignment
 ## TODO
-- [ ] Introduction - Vishal
-- [ ] Negation - Vishal
-- [ ] Negation Testing - Vishal
 - [ ] Disjunction - Jack
 - [ ] Disjunction Testing - Jack
-- [ ] Existential Quantification - Vishal
-- [ ] Existential Quantification Testing - Vishal
-- [ ] Default Rules - Jack
 - [ ] Default Rules Testing - Jack
 - [ ] Further work - Jack
 
@@ -265,4 +259,5 @@ After initial testing, the names attachment from 8.1 was identified to be alread
 ### Testing
 
 ## Further Work
-
+This assignment did not implement Abduction within prolexa plus; however, this can be implemented through following Simply Logical chapter 8.4's abduction meta-interpreter and abduction explanation.
+ 
