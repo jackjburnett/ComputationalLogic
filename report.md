@@ -290,6 +290,29 @@ prolexa> "most birds fly".
 *** answer(I will remember that most birds fly)
 I will remember that most birds fly
 ```
+A full example of implemtation and testing is:
+```
+prolexa> "bob is human".
+*** utterance(bob is human)
+*** rule([(human(bob):-true)])
+*** answer(I will remember that bob is human)
+I will remember that bob is human
+prolexa> "most humans fly".
+*** utterance(most humans fly)
+*** rule([default((fly(_1912):-human(_1912)))])
+*** answer(I will remember that most humans fly)
+I will remember that most humans fly
+prolexa> "does bob fly".
+*** utterance(does bob fly)
+*** query(fly(bob))
+*** answer(bob flies)
+bob flies
+prolexa> "explain why bob flies".
+*** utterance(explain why bob flies)
+*** goal(explain_question(fly(bob),_3318,_3138))
+*** answer(bob is human; most humans fly; therefore bob flies)
+bob is human; most humans fly; therefore bob flies
+```
 ## Abduction
 The implementation of abduction used for testing builds upon default rules; it implements a rule that can fly, to identify if it will be explained through being a bird.
 ```
