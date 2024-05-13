@@ -38,6 +38,9 @@ stored_rule(1,[(bird(X):-penguin(X))]).
 stored_rule(1,[(penguin(tweety):-true)]).
 stored_rule(1,[(bird(opus):-true)]).
 
+%default rule for default rule checking
+stored_rule(1,[(bird(sk):-true)]).
+
 % default rule for adbuction
 stored_rule(1,[(fly(abe):-true)]).
 
