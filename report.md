@@ -198,15 +198,14 @@ prolexa> "Do some humans win".
 *** answer(some humans win)
 some humans win
 ```
-
+The code below can be used for explaining existential quantification; however, whilst this has sound logic and gives us the outcome that we desire, the explanation of this is confusing. This is primarily due to the loop introduced, which repeats the existential quantification rule that 'some humans are geniuses'.
 ```
-"Explain why some humans win".
-
+prolexa> "Explain why some humans win".
+*** utterance(Explain why some humans win)
+*** goal(explain_question([human(sk),win(sk)],_64606,_64396))
+*** answer(some humans are geniuses; every genius wins; some humans are geniuses; therefore some humans win)
 some humans are geniuses; every genius wins; some humans are geniuses; therefore some humans win
-
 ```
-
-Whilst again, this has sound logic and gives us the outcome that we desire, the explanation of this is confusing. This is primarily due to the loop introduced which repeats the existential quantification rule 'some humans are geniuses'.
 
 ## Default Rules
 To test default rules, the birds and flying example from Simply Logical 8.1 were implemented. The grammar did not need to be changed for these stored rules. The following code was used to implement the rules from Simply Logical:
