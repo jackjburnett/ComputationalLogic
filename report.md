@@ -342,6 +342,13 @@ find_explanation was used to give clarity to the code's functionality.
 ### Testing
 
 ## Further Work
+Default rules can be enhanced by enabling the question 'do most x y' and the program responding with true of false, based on if a default rule exists. 
+The necessary code that needs to be manipulated is:
+```
+question1((Q1,Q2)) --> [do],[most],noun(_,query),verb_phrase(_,query).
+```
+but after extended trial and error, the necessary queries could not be found.  
+
 This assignment did not implement disjuction within prolexa plus; however, this can be implemented through building upon Simply Logical chapter 8.3 by modifying the below code for prolexa:
 ```
 % abduce_not(O,E0,E) <- E is abductive expl. of not(O)
