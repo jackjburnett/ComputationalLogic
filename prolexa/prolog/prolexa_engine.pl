@@ -155,7 +155,7 @@ prove_e((A,B),Rulebase,P0,P):-!,
     prove_e(D,Rulebase,[p((A,B),Rule)|P0],P).
 prove_e(A,Rulebase,P0,P):-
   find_clause((A:-B),Rule,Rulebase),
-	prove_e(B,Rulebase,[p(A,Rule)|P0],P).
+  prove_e(B,Rulebase,[p(A,Rule)|P0],P).
 
 % Check contradiction against rules
 contradiction(not A,Rulebase,P):-!,

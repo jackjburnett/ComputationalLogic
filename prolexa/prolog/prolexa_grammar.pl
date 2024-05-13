@@ -97,7 +97,7 @@ determiner(p,X=>B,X=>H,[(H:-B)]) --> [all].
 
 % TODO: explain this with comments %
 determiner(p,X=>B,not X=>H,[(not H:-B)]) --> [all].
-determiner(p,X=>B,not X=>H,[(not H:-B)]) --> []. 
+determiner(p,X=>B,not X=>H,[(not H:-B)]) --> [].
 determiner(p,X=>B,X=>H,[(H:-B)]) --> [most]. %default rules
 determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 determiner(p, sk=>H1, sk=>H2, [(H2:-true),(H1:-true)]) -->[some].
