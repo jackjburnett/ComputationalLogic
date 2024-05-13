@@ -80,37 +80,45 @@ I will find a rule such as 'enthusiastic if volunteer' and prove that someone is
 We present a test of logical negation in prolog below.
 
 ```
-"Every volunteer is enthusiastic".
-
-I already knew every volunteer is enthusiastic
-
-"bob is not enthusiastic".
-
-I already knew bob is not enthusiastic
-
-"Is bob a volunteer".
-
-Sorry I don't think this is the case
-
-"Explain why bob is not a volunteer".
-
-bob is not enthusiastic; every volunteer is enthusiastic; therefore bob is not a volunteer.
+prolexa> "Every volunteer is enthusiastic".
+*** utterance(Every volunteer is enthusiastic)
+*** rule([(enthusiastic(_59646):-volunteer(_59646))])
+*** answer(I already knew that Every volunteer is enthusiastic)
+I already knew that Every volunteer is enthusiastic
+prolexa> "bob is not enthusiastic".
+*** utterance(bob is not enthusiastic)
+*** rule([(not(enthusiastic(bob)):-true)])
+*** answer(I already knew that bob is not enthusiastic)
+I already knew that bob is not enthusiastic
+prolexa> "Is bob a volunteer".
+*** utterance(Is bob a volunteer)
+*** query(volunteer(bob))
+*** answer(Sorry, I don't think this is the case)
+Sorry, I don't think this is the case
+prolexa> "Explain why bob is not a volunteer".
+*** utterance(Explain why bob is not a volunteer)
+*** goal(explain_question(not(volunteer(bob)),_62444,_62170))
+*** answer(bob is not enthusiastic; every volunteer is enthusiastic; therefore bob is not a volunteer)
+bob is not enthusiastic; every volunteer is enthusiastic; therefore bob is not a volunteer
 ```
 Whilst this proves that logical negation has been implemented, negation in defined rules cannot be handled, as can be seen by the following example.
 
 ```
-"Every capybara is adorable".
-
-I already knew that every capybara is adorable
-
-"bob is adorable".
-
+prolexa> "Every capybara is adorable".
+*** utterance(Every capybara is adorable)
+*** rule([(adorable(_63744):-capybara(_63744))])
+*** answer(I already knew that Every capybara is adorable)
+I already knew that Every capybara is adorable
+prolexa> "bob is adorable".
+*** utterance(bob is adorable)
+*** rule([(adorable(bob):-true)])
+*** answer(I will remember that bob is adorable)
 I will remember that bob is adorable
-
-"Is bob a capybara".
-
+prolexa> "Is bob a capybara".
+*** utterance(Is bob a capybara)
+*** query(capybara(bob))
+*** answer(Sorry, I don't think this is the case)
 Sorry, I don't think this is the case
-
 ```
 
 ## Existential Quantification
