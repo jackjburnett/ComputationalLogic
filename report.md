@@ -182,18 +182,23 @@ It deals with existential quantification, by generating a new variable, substitu
 Below we present a test of existential quantification.
 
 ```
-"Some humans are geniuses"
-
-I will remember that some humans are geniuses
-
-"every genius win".
-
-I already knew every genius wins
-
-"Do some humans win".
-
+prolexa> "Some humans are geniuses".
+*** utterance(Some humans are geniuses)
+*** rule([(human(sk):-true),(genius(sk):-true)])
+*** answer(I will remember that Some humans are geniuses)
+I will remember that Some humans are geniuses
+prolexa> "every genius win".
+*** utterance(every genius win)
+*** answer(I heard you say,  every genius win , could you rephrase that please?)
+I heard you say,  every genius win , could you rephrase that please?
+prolexa> "Do some humans win".
+*** utterance(Do some humans win)
+*** query((human(sk),win(sk)))
+*** answer(some humans win)
 some humans win
+```
 
+```
 "Explain why some humans win".
 
 some humans are geniuses; every genius wins; some humans are geniuses; therefore some humans win
