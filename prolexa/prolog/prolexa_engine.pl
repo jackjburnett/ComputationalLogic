@@ -135,6 +135,10 @@ prove_rb(not B,Rulebase,P0,P):- % Added for negation
 	find_clause((A:-B),Rule,Rulebase),
 	prove_rb(not A,Rulebase,[p(not B,Rule)|P0],P).
 
+prove_rb((A,B),Rulebase,P0,P):-!, % Added for existential quantification
+	prove_rb(A,Rulebase,P0,P),
+	prove_rb(B,Rulebase,P0,P).
+
 prove_rb((exists(V, A)), Rulebase, P0, P) :- !, % Handling existential quantification
     fresh_variable(V, FreshV),
     substitute(A, V, FreshV, NewA),
