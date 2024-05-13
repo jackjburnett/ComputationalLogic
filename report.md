@@ -1,9 +1,4 @@
 # Computational Logic Assignment
-## TODO
-- [ ] Abduction - Jack
-- [ ] Abduction Testing - Jack
-- [ ] Default Rules Testing - Jack
-
 ## Introduction
 The objective of this coursework assignment was to implement additional functionality to the Prolexa code that it cannot currently handle. In our case, we implemented negation, existential quantification, abduction and default rules. This report will discuss and explain how the functionalities were implemented, the tests that we used to check they work and the suggestions for further work to improve Prolexa.
 
