@@ -282,6 +282,14 @@ prolexa> "Explain why opus flies".
 *** answer(opus is a bird; most birds fly; therefore opus flies)
 opus is a bird; most birds fly; therefore opus flies
 ```
+Default rules can be implemented by saying most noun verb:
+```
+prolexa> "most birds fly".
+*** utterance(most birds fly)
+*** rule([default((fly(_4100):-bird(_4100)))])
+*** answer(I will remember that most birds fly)
+I will remember that most birds fly
+```
 ## Abduction
 The implementation of abduction used for testing builds upon default rules; it implements a rule that can fly, to identify if it will be explained through being a bird.
 ```
