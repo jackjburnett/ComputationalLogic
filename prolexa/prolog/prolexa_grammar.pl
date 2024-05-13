@@ -33,6 +33,11 @@ pred(salmon, 1,[n/salmon]).
 pred(shark, 1,[n/shark]).
 pred(swim,     1,[v/swim]).
 
+% For default rules and abduction
+pred(bird,     1,[n/bird]).
+pred(penguin,     1,[n/penguin]).
+pred(fly,     1,[v/fly]).
+
 pred2gr(P,1,C/W,X=>Lit):-
 	pred(P,1,L),
 	member(C/W,L),
@@ -100,6 +105,8 @@ determiner(p, sk=>H1, sk=>H2, [(H2:-true),(H1:-true)]) -->[some].
 proper_noun(s,peter) --> [peter].
 proper_noun(s,bob) --> [bob].
 proper_noun(s,tweety) --> [tweety].
+proper_noun(s,opus) --> [opus].
+proper_noun(s,abe) --> [abe].
 proper_noun(s,rob) --> [rob].
 
 %%% questions %%%

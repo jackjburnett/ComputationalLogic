@@ -254,3 +254,14 @@ To test the code execute
 ```
 python prolexa/tests/test.py
 ```
+
+# Simplified version
+Open terminal in this repos directory.
+Use the following swipl command to run swipl:
+```
+swipl prolexa\prolog\prolexa.pl
+```
+Enter the following command to start prolexa:
+```
+prolexa_cli.
+```

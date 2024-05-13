@@ -200,7 +200,6 @@ some humans are geniuses; every genius wins; some humans are geniuses; therefore
 Whilst again, this has sound logic and gives us the outcome that we desire, the explanation of this is confusing. This is primarily due to the loop introduced which repeats the existential quantification rule 'some humans are geniuses'.
 
 ## Default Rules
-### Implementation
 To test default rules, the birds and flying example from Simply Logical 8.1 were implemented. The grammar did not need to be changed for these stored rules. The following code was used to implement the rules from Simply Logical:
 ```
 stored_rule(1,[(default(flies(X):-bird(X)))]).
@@ -209,6 +208,18 @@ stored_rule(1,[(bird(X):-penguin(X))]).
 stored_rule(1,[(penguin(tweety):-true)]).
 stored_rule(1,[(bird(opus):-true)]).
 ```
+The following was added to prolexa's grammar to identify the proper nouns used:
+```
+proper_noun(s,tweety) --> [tweety].
+proper_noun(s,opus) --> [opus].
+```
+The following predicates were added to identify the nouns and verbs used:
+```
+pred(bird,     1,[n/bird]).
+pred(penguin,     1,[n/penguin]).
+pred(flies,     1,[v/flies]).
+```
+### Implementation
 A determiner was required in the grammar. The term 'most' wass used to align with the examples provided in assignment.md. The determiner translates default rules to 'most'. 
 ```
 determiner(p,X=>B,X=>H,[(default(H:-B))]) --> [most]. 
@@ -252,12 +263,35 @@ contradiction(A,Rulebase,P):-
 ```
 After initial testing, the names attachment from 8.1 was identified to be already implemented through the initial prolexa_plus commit.
 ### Testing
-
+As the rules were already stored for testing, default rules can be tested through asking prolexa while opus flies.
+Below is the conversation with Prolexa, proving that default rules work:
+```
+prolexa> "opus is a bird".
+*** utterance(opus is a bird)
+*** rule([(bird(opus):-true)])
+*** answer(I already knew that opus is a bird)
+I already knew that opus is a bird
+prolexa> "Does opus fly".
+*** utterance(Does opus fly)
+*** query(fly(opus))
+*** answer(opus flies)
+opus flies
+prolexa> "Explain why opus flies".
+*** utterance(Explain why opus flies)
+*** goal(explain_question(fly(opus),_61814,_61634))
+*** answer(opus is a bird; most birds fly; therefore opus flies)
+opus is a bird; most birds fly; therefore opus flies
+```
 ## Abduction
 The implementation of abduction used for testing builds upon default rules; it implements a rule that can fly, to identify if it will be explained through being a bird.
 ```
 stored_rule(1,[(flies(abe):-true)]).
 ```
+The following was added to prolexa's grammar to identify the nouns used:
+```
+proper_noun(s,abe) --> [abe].
+```
+
 ### Implementation
 Abduction is implemented through replicating default rules, but combining explanations rather than proving each component. Abduction forms an explanation rather than proving components, the below code is used to implement abduction:
 ```
