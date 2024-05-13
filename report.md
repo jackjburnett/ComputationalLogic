@@ -347,8 +347,16 @@ find_explanation((A:-B), Rule, Rulebase) :-
 ```
 find_explanation was used to give clarity to the code's functionality.
 
-### Testing
-
+Many attempts for implementing the grammar were attempted, with the final being:
+```
+question1(Q) --> [could], proper_noun(N,X), [be], noun(N,M).
+```
+A method within the grammar that allows for abduction to be called is necessary, akin to:
+```
+{abduce((X could be M), Rulebase, [], Q)}
+```
+Abduction was only implemented through the prolexa engine, as suitable grammar implementations could not be found.
+ 
 ## Further Work
 Default rules can be enhanced by enabling the question 'do most x y' and the program responding with true of false, based on if a default rule exists. 
 The necessary code that needs to be manipulated is:
