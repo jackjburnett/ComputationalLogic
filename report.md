@@ -187,10 +187,11 @@ prolexa> "Some humans are geniuses".
 *** rule([(human(sk):-true),(genius(sk):-true)])
 *** answer(I will remember that Some humans are geniuses)
 I will remember that Some humans are geniuses
-prolexa> "every genius win".
-*** utterance(every genius win)
-*** answer(I heard you say,  every genius win , could you rephrase that please?)
-I heard you say,  every genius win , could you rephrase that please?
+prolexa> "every genius wins". 
+*** utterance(every genius wins)
+*** rule([(win(_62702):-genius(_62702))])
+*** answer(I already knew that every genius wins)
+I already knew that every genius wins
 prolexa> "Do some humans win".
 *** utterance(Do some humans win)
 *** query((human(sk),win(sk)))
