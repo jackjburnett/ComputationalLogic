@@ -257,11 +257,11 @@ python prolexa/tests/test.py
 
 # Simplified version
 Open terminal in this repos directory.
-Use the following swipl command to run swipl:
+Use the following command to run prolexa in swipl:
 ```
 swipl prolexa\prolog\prolexa.pl
 ```
-Enter the following command to start prolexa:
+Enter the following command to start the prolexa command-line interface:
 ```
 prolexa_cli.
 ```
